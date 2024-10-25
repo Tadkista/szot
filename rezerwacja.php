@@ -1,32 +1,42 @@
 <?php
-// Connecting to the database
+// rezerwacja.php
+
+// Połączenie z bazą danych
 $servername = "localhost";
 $username = "root";
 $password = "";
-$database = "baza";
+$dbname = "baza";
 
-$conn = new mysqli($servername, $username, $password, $database);
+// Utworzenie połączenia
+$conn = new mysqli($servername, $username, $password, $dbname);
 
-// Check connection
+// Sprawdzenie połączenia
 if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+    die("Błąd połączenia: " . $conn->connect_error);
 }
 
-// Retrieving form data
-$data = $_POST['data'];
-$osoby = $_POST['osoby'];
+// Pobieranie danych z formularza
+$data_rez = $_POST['data_rez'];
+$liczba_osob = $_POST['liczba_osob'];
 $telefon = $_POST['telefon'];
-$zgoda = isset($_POST['zgoda']) ? 1 : 0;
 
-// Inserting data into the database
-$sql = "INSERT INTO rezerwacje (data, osoby, telefon, zgoda) VALUES ('$data', '$osoby', '$telefon', '$zgoda')";
+// Zapytanie SQL do wstawienia danych do tabeli rezerwacje
+$sql = "INSERT INTO rezerwacje (data_rez, liczba_osob, telefon) VALUES (?, ?, ?)";
 
-if ($conn->query($sql) === TRUE) {
+// Przygotowanie zapytania
+$stmt = $conn->prepare($sql);
+
+// Powiązanie parametrów i wykonanie zapytania
+$stmt->bind_param("sis", $data_rez, $liczba_osob, $telefon);
+if ($stmt->execute()) {
     echo "Dodano rezerwację do bazy";
 } else {
-    echo "Błąd: " . $sql . "<br>" . $conn->error;
+    echo "Błąd: " . $stmt->error;
 }
 
-// Closing the connection
+// Zamknięcie zapytania
+$stmt->close();
+
+// Zamknięcie połączenia
 $conn->close();
 ?>
