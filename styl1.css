@@ -1,0 +1,53 @@
+/* General page styling */
+body {
+    background-color: #F6E5DC;
+    font-family: Verdana, sans-serif;
+}
+
+/* Baner styling */
+#baner {
+    background-color: #2F180C;
+    color: khaki;
+    text-align: center;
+    height: 60px;
+    line-height: 60px;
+}
+
+/* Left panel styling */
+#panel_lewy {
+    float: left;
+    width: 60%;
+}
+
+/* Right panel styling */
+#panel_prawy {
+    font-size: 150%;
+    padding: 70px;
+}
+
+/* Bottom panel styling */
+#panel_dolny {
+    background-color: #D0B6A8;
+    text-align: center;
+    padding: 30px;
+    clear: both;
+}
+
+/* Footer styling */
+#stopka {
+    background-color: #2F180C;
+    color: khaki;
+    text-align: center;
+    height: 60px;
+    line-height: 60px;
+}
+
+/* Button styling */
+button {
+    margin: 10px;
+    padding: 5px;
+    background-color: #2F180C;
+    color: khaki;
+    border: none;
+    cursor: pointer;
+}
